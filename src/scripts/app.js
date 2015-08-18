@@ -1,18 +1,26 @@
-/* eslint-env browser */
-
 import instagram from "./instagram";
 
 function loadPhotos() {
     instagram((err, res) => {
-        if (err) {
-            return console.error(err);
-        }
-
-        let images = res.data.map(p => p.images.standard_resolution.url);
-
         let stream = document.getElementById("instagram-stream");
 
-        stream.innerHTML = images.map(url => `<div class="col small-12 medium-6 large-4"><img class="photo" src="${url}"></div>`).join("\n");
+        if (err) {
+            stream.textContent = "An error occurred while loading images :(";
+
+            return;
+        }
+
+        if (res.data.length === 0) {
+            stream.textContent = "No images found :(";
+
+            return;
+        }
+
+        stream.innerHTML = res.data.map(p => {
+            return `<div class="col small-12 medium-6 large-4">
+                        <a class="photo" target="_blank" href="${p.link}"><img src="${p.images.standard_resolution.url}"></a>
+                    </div>`;
+        }).join("\n");
     });
 }
 

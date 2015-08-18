@@ -168,7 +168,11 @@ body {
 }
 
 .photo-stream {
-    .photo { border-radius: 3px; }
+    .photo {
+        border: 0;
+
+        > img { border-radius: 3px; }
+    }
 }
 
 .event-section {
