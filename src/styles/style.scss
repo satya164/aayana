@@ -84,14 +84,24 @@ body {
 }
 
 .logo {
-    padding: .25em .5em;
+    padding: .5em;
+    line-height: 1.2;
+
+    @media #{$mobile-screen} { line-height: 1.4; }
 
     > h1 {
-        font-size: 1.5em;
+        font-size: 1.2em;
         margin: 0;
+
+        @media #{$mobile-screen} { font-size: 1.5em; }
     }
 
-    > span { opacity: .5;}
+    > span {
+        font-size: .75em;
+        opacity: .5;
+
+        @media #{$mobile-screen} { font-size: 1em; }
+    }
 }
 
 .tel {
