@@ -101,8 +101,6 @@ gulp.task("scripts:watch", () => {
     bundle.watch = true;
 
     gulp.start("scripts");
-
-    gulp.watch("src/scripts/**/*.js", [ "lint" ]);
 });
 
 gulp.task("styles", () =>
