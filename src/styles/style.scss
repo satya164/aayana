@@ -84,10 +84,11 @@ body {
 }
 
 .logo {
-    padding: .5em;
     line-height: 1.2;
 
     @media #{$mobile-screen} { line-height: 1.4; }
+
+    &-wrapper { padding: .5em; }
 
     > h1 {
         font-size: 1.2em;
@@ -143,16 +144,16 @@ body {
     }
 }
 
-@include grid;
+@include grid($gutter: 1em);
 
 .section-content {
     max-width: 60em;
     margin: auto;
-    padding: 1.5em;
+    padding: 2em;
 }
 
 .address-section {
-    background-color: lighten($accent, 45%);
+    background-color: rgba(0, 0, 0, .025);
 
     .map {
         background-image: url(../../assets/map.png);
@@ -168,4 +169,43 @@ body {
 
 .photo-stream {
     .photo { border-radius: 3px; }
+}
+
+.event-section {
+    .event-preview { border-radius: 3px; }
+}
+
+footer {
+    background-color: rgba(0, 0, 0, .025);
+
+    .social {
+        color: currentColor;
+        font-size: 1.2em;
+        font-weight: 700;
+        border: 0;
+        opacity: .5;
+
+        &:before {
+            margin-right: .5em;
+            vertical-align: -.25em;
+        }
+
+        &:focus, &:hover, &:active { background-color: transparent; }
+
+        &:hover { opacity: .8; }
+
+        &:active { opacity: 1; }
+    }
+
+    [href*=facebook] {
+        &:before {
+            content: url("data:image/svg+xml; utf8, <svg width='24' height='24' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'><title>facebook</title><path d='M19.646 9.3v6.61h-4.843v8.082h4.843v24.02h9.95v-24.02h6.675s.626-3.875.93-8.113H29.63V10.35c0-.826 1.085-1.937 2.157-1.937h5.42V0h-7.37C19.4 0 19.646 8.09 19.646 9.3z' fill='#000' fill-rule='evenodd'/></svg>");
+        }
+    }
+
+    [href*=youtube] {
+        &:before {
+            content: url("data:image/svg+xml; utf8, <svg width='24' height='24' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'><title>youtube</title><path d='M48 14.415c0-3.95-3.21-7.15-7.173-7.15H7.173C3.21 7.266 0 10.466 0 14.416v19.17c0 3.95 3.21 7.15 7.173 7.15h33.654c3.962 0 7.173-3.2 7.173-7.15v-19.17zM19.2 32.088V14.082l13.708 9.003L19.2 32.088z' fill='#000' fill-rule='evenodd'/></svg>");
+        }
+    }
 }
