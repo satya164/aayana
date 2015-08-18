@@ -1,0 +1,34 @@
+{
+  "name": "@satya164/portfolio",
+  "version": "1.0.0",
+  "description": "Satyajit Sahoo's portfolio",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Satyajit Sahoo <satyajit.happy@gmail.com> (https://github.com/satya164/)",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "latest",
+    "babel-eslint": "latest",
+    "babelify": "latest",
+    "browser-sync": "latest",
+    "browserify": "latest",
+    "del": "latest",
+    "eslint": "latest",
+    "gulp": "latest",
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-combine-mq": "^0.4.0",
+    "gulp-eslint": "latest",
+    "gulp-minify-css": "^1.2.0",
+    "gulp-notify": "latest",
+    "gulp-plumber": "latest",
+    "gulp-rename": "latest",
+    "gulp-sass": "latest",
+    "gulp-sourcemaps": "latest",
+    "gulp-uglify": "latest",
+    "gulp-util": "latest",
+    "vinyl-buffer": "latest",
+    "vinyl-source-stream": "latest",
+    "watchify": "latest"
+  }
+}
