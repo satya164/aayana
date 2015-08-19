@@ -4,13 +4,13 @@ function loadPhotos(err, res) {
     let stream = document.getElementById("instagram-stream");
 
     if (err) {
-        stream.textContent = "An error occurred while loading photos :(";
+        stream.innerHTML = '<div class="col small-12">An error occurred while loading photos :(</div>';
 
         return;
     }
 
     if (res.data.length === 0) {
-        stream.textContent = "No photos found :(";
+        stream.innerHTML = '<div class="col small-12">No photos found :(</div>';
 
         return;
     }
