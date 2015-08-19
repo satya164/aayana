@@ -5,22 +5,40 @@ function loadPhotos() {
         let stream = document.getElementById("instagram-stream");
 
         if (err) {
-            stream.textContent = "An error occurred while loading images :(";
+            stream.textContent = "An error occurred while loading photos :(";
 
             return;
         }
 
         if (res.data.length === 0) {
-            stream.textContent = "No images found :(";
+            stream.textContent = "No photos found :(";
 
             return;
         }
 
-        stream.innerHTML = res.data.map(p => {
-            return `<div class="col small-12 medium-6 large-4">
-                        <a class="photo" target="_blank" href="${p.link}"><img src="${p.images.standard_resolution.url}"></a>
-                    </div>`;
-        }).join("\n");
+        let fragment = document.createDocumentFragment();
+
+        res.data.forEach(p => {
+            let div = document.createElement("div"),
+                link = document.createElement("a"),
+                image = document.createElement("img");
+
+            div.className = "col small-12 medium-6 large-4";
+
+            link.className = "photo";
+            link.target = "_blank";
+            link.href = p.link;
+
+            image.src = p.images.standard_resolution.url;
+
+            link.appendChild(image);
+            div.appendChild(link);
+
+            fragment.appendChild(div);
+        });
+
+        stream.innerHTML = "";
+        stream.appendChild(fragment);
     });
 }
 
