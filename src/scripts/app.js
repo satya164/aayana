@@ -28,7 +28,11 @@ function loadPhotos(err, res) {
         link.target = "_blank";
         link.href = p.link;
 
-        image.src = p.images.standard_resolution.url;
+        if (window.screen.width <= 360 && window.devicePixelRatio === 1) {
+            image.src = p.images.low_resolution.url;
+        } else {
+            image.src = p.images.standard_resolution.url;
+        }
 
         link.appendChild(image);
         div.appendChild(link);
