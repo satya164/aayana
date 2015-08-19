@@ -16,10 +16,10 @@ body {
     line-height: 1.624;
 }
 
-@mixin banner-image($size: 1) {
+@mixin banner-image($size: 1, $suffix: "") {
     $bg: darken(fade-out($accent, .3), 30%);
 
-    background-image: linear-gradient(to bottom, $bg, $bg), url(../../assets/cover@#{$size}x.jpg);
+    background-image: linear-gradient(to bottom, $bg, $bg), url(../../assets/cover-${suffix}@#{$size}x.jpg);
 }
 
 .cover {
@@ -60,27 +60,47 @@ body {
         @include retina(3) { @include banner-image(3); }
     }
 
-    @media only screen and (min-device-width: 320px) and (orientation: landscape) {
-        @include banner-image(1.3);
+    @media only screen and (min-device-width: 640px) and (orientation: landscape) {
+        @include banner-image(1.5);
 
         @include retina(1.3) { @include banner-image(2); }
 
         @include retina(2) { @include banner-image(3); }
     }
 
-    @media only screen and (min-device-width: 414px) and (orientation: landscape) {
+    @media only screen and (min-device-width: 960px) and (orientation: landscape) {
         @include banner-image(2);
 
         @include retina(1.3) { @include banner-image(3); }
     }
+
+    @media only screen and (min-device-width: 1280px) and (orientation: landscape) { @include banner-image(3); }
 
     @media only screen and (orientation: potrait) {
-        @include banner-image(2);
+        @include banner-image(1, "-potrait");
 
-        @include retina(1.3) { @include banner-image(3); }
+        @include retina(1.3) { @include banner-image(1.5, "-potrait"); }
+
+        @include retina(2) { @include banner-image(2, "-potrait"); }
+
+        @include retina(3) { @include banner-image(3, "-potrait"); }
     }
 
-    @media only screen and (min-device-width: 320px) and (orientation: potrait) { @include banner-image(3); }
+    @media only screen and (min-device-width: 320px) and (orientation: potrait) {
+        @include banner-image(1.5, "-potrait");
+
+        @include retina(1.3) { @include banner-image(2, "-potrait"); }
+
+        @include retina(2) { @include banner-image(3, "-potrait"); }
+    }
+
+    @media only screen and (min-device-width: 414px) and (orientation: potrait) {
+        @include banner-image(2, "-potrait");
+
+        @include retina(1.3) { @include banner-image(3, "-potrait"); }
+    }
+
+    @media only screen and (min-device-width: 640px) and (orientation: potrait) { @include banner-image(3, "-potrait"); }
 }
 
 .logo {
