@@ -19,7 +19,7 @@ body {
 @mixin banner-image($size: 1, $suffix: "") {
     $bg: darken(fade-out($accent, .3), 30%);
 
-    background-image: linear-gradient(to bottom, $bg, $bg), url(../../assets/cover-${suffix}@#{$size}x.jpg);
+    background-image: linear-gradient(to bottom, $bg, $bg), url(../../assets/cover#{$suffix}@#{$size}x.jpg);
 }
 
 .cover {
