@@ -6,6 +6,7 @@
 
 $white: #fff;
 $accent: #ff9800;
+$overlay: darken(fade-out($accent, .3), 30%);
 $mobile-screen: only screen and (min-width: 480px);
 
 html, body { height: 100%; }
@@ -17,15 +18,13 @@ body {
 }
 
 @mixin banner-image($size: 1, $suffix: "") {
-    $bg: darken(fade-out($accent, .3), 30%);
-
-    background-image: linear-gradient(to bottom, $bg, $bg), url(../../assets/cover#{$suffix}@#{$size}x.jpg);
+    background-image: linear-gradient(to bottom, $overlay, $overlay), url(../../assets/cover#{$suffix}@#{$size}x.jpg);
 }
 
 .cover {
     @include banner-image;
 
-    background-color: rgba(255, 152, 0, 1);
+    background-color: $accent;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -176,7 +175,7 @@ body {
     background-color: rgba(0, 0, 0, .025);
 
     .map {
-        background-image: url(../../assets/map.png);
+        background-image: url("../../assets/map.png");
         background-size: auto 100%;
         background-position: center;
         height: 12em;
@@ -189,9 +188,73 @@ body {
 
 .photo-stream {
     .photo {
+        position: relative;
+        display: block;
         border: 0;
+        border-radius: 3px;
+        overflow: hidden;
+        color: $white;
 
-        > img { border-radius: 3px; }
+        > img { display: block; }
+
+        > figcaption {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            background-color: $overlay;
+            transition: 300ms ease-out;
+
+            &:after {
+                content: "#" attr(data-title);
+                display: block;
+                text-align: center;
+                text-transform: uppercase;
+                font-weight: 300;
+                transform: translateY(-50%);
+                margin-top: 50%;
+                width: 100%;
+            }
+        }
+
+        &:before, &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            transition: 300ms ease-out;
+            z-index: 10;
+        }
+
+        &:before {
+            top: 2em;
+            right: 1em;
+            bottom: 2em;
+            left: 1em;
+            border-top: 1px solid currentColor;
+            border-bottom: 1px solid currentColor;
+            transform: scale(0, 1);
+            transform-origin: 0 0;
+        }
+
+        &:after {
+            top: 1em;
+            right: 2em;
+            bottom: 1em;
+            left: 2em;
+            border-right: 1px solid currentColor;
+            border-left: 1px solid currentColor;
+            transform: scale(1, 0);
+            transform-origin: 100% 0;
+        }
+
+        &:hover {
+            > figcaption { opacity: 1; }
+
+            &:before, &:after { transform: scale(1, 1); }
+        }
     }
 }
 

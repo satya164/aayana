@@ -20,7 +20,8 @@ function loadPhotos(err, res) {
     res.data.forEach(p => {
         let div = document.createElement("div"),
             link = document.createElement("a"),
-            image = document.createElement("img");
+            image = document.createElement("img"),
+            caption = document.createElement("figcaption");
 
         div.className = "col small-12 medium-6 large-4";
 
@@ -34,7 +35,21 @@ function loadPhotos(err, res) {
             image.src = p.images.standard_resolution.url;
         }
 
+        for (let i = 0, l = p.tags.length; i < l; i++) {
+            const tag = p.tags[i];
+
+            if (i < (l - 1) && (tag === "iamaayana" || tag.length > 15)) {
+                continue;
+            }
+
+            caption.setAttribute("data-title", tag);
+
+            break;
+        }
+
         link.appendChild(image);
+        link.appendChild(caption);
+
         div.appendChild(link);
 
         fragment.appendChild(div);
