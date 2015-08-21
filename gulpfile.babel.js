@@ -92,6 +92,7 @@ gulp.task("bundle", () =>
         .pipe(rename({ suffix: ".min" }))
         .pipe(sourcemaps.write("."))
         .pipe(gulp.dest("dist/scripts"))
+        .pipe(browsersync.stream())
     )
 );
 
@@ -114,6 +115,7 @@ gulp.task("styles", () =>
     .pipe(rename({ suffix: ".min" }))
     .pipe(sourcemaps.write("."))
     .pipe(gulp.dest("dist/styles"))
+    .pipe(browsersync.stream())
 );
 
 gulp.task("styles:watch", () => gulp.watch("src/styles/**/*.scss", [ "styles" ]));
@@ -121,7 +123,9 @@ gulp.task("styles:watch", () => gulp.watch("src/styles/**/*.scss", [ "styles" ])
 // Clean up generated files
 gulp.task("clean", () => del("dist/"));
 
-gulp.task("watch", [ "scripts:watch", "styles:watch" ]);
+gulp.task("watch", [ "scripts:watch", "styles:watch" ], () => {
+    gulp.watch("index.html").on("change", browsersync.reload);
+});
 
 // Synchronise file changes in browser
 gulp.task("browsersync", function() {
