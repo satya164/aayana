@@ -7,6 +7,7 @@
 $white: #fff;
 $accent: #ff9800;
 $overlay: darken(fade-out($accent, .3), 30%);
+$stripe: url("../../assets/pattern-stripe.svg");
 $mobile-screen: only screen and (min-width: 480px);
 
 html, body { height: 100%; }
@@ -18,15 +19,15 @@ body {
 }
 
 @mixin banner-image($size: 1, $suffix: "") {
-    background-image: linear-gradient(to bottom, $overlay, $overlay), url(../../assets/cover#{$suffix}@#{$size}x.jpg);
+    background-image: $stripe, linear-gradient(to bottom, $overlay, $overlay), url(../../assets/cover#{$suffix}@#{$size}x.jpg);
 }
 
 .cover {
     @include banner-image;
 
     background-color: $accent;
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-size: 100% cover cover;
+    background-repeat: repeat no-repeat no-repeat;
     background-position: center;
     display: table;
     table-layout: fixed;
@@ -229,6 +230,9 @@ body {
             padding: 5.5em 0;
             text-transform: uppercase;
             font-weight: 300;
+            background-image: $stripe;
+            background-position: center;
+            background-repeat: repeat;
             background-color: $overlay;
             opacity: 0;
         }
@@ -260,6 +264,9 @@ body {
             height: 100%;
             width: 100%;
             opacity: 0;
+            background-image: $stripe;
+            background-position: center;
+            background-repeat: repeat;
             background-color: $overlay;
             transition: 300ms ease-out;
 
@@ -268,7 +275,7 @@ body {
                 display: block;
                 text-align: center;
                 text-transform: uppercase;
-                font-weight: 100;
+                font-weight: 300;
                 transform: translateY(-50%);
                 margin-top: 50%;
                 width: 100%;
