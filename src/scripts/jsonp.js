@@ -13,5 +13,7 @@ export default function jsonp(url, cb) {
 
     script.src = url + (url.indexOf("?") > -1 ? "&" : "?") + "callback=" + callbackName;
 
+    script.onerror = () => cb(new Error("Failed to load data"));
+
     document.body.appendChild(script);
 }
