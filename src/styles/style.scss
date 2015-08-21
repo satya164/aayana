@@ -6,8 +6,6 @@
 
 $white: #fff;
 $accent: #ff9800;
-$overlay: darken(fade-out($accent, .3), 30%);
-$stripe: url("../../assets/pattern-stripe.svg");
 $mobile-screen: only screen and (min-width: 480px);
 
 html, body { height: 100%; }
@@ -19,20 +17,47 @@ body {
 }
 
 @mixin banner-image($size: 1, $suffix: "") {
-    background-image: $stripe, linear-gradient(to bottom, $overlay, $overlay), url(../../assets/cover#{$suffix}@#{$size}x.jpg);
+    background-image: url(../../assets/cover#{$suffix}@#{$size}x.jpg);
+}
+
+%overlay {
+    background-image: url("../../assets/pattern-stripe.svg");
+    background-position: center;
+    background-repeat: repeat;
+    background-color: darken(fade-out($accent, .3), 30%);
 }
 
 .cover {
     @include banner-image;
 
+    position: relative;
     background-color: $accent;
-    background-size: 100% cover cover;
-    background-repeat: repeat no-repeat no-repeat;
+    background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
-    display: table;
-    table-layout: fixed;
     height: 100%;
     width: 100%;
+
+    &:before {
+        @extend %overlay;
+
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+    }
+
+    &-inner {
+        position: relative;
+        display: table;
+        table-layout: fixed;
+        height: 100%;
+        width: 100%;
+        z-index: 10;
+    }
 
     &-content {
         display: table-cell;
@@ -140,46 +165,45 @@ body {
     left: 0;
     width: 100%;
     color: $white;
+    z-index: 20;
 
     &-left { float: left; }
 
     &-right { float: right; }
 
-    > ul {
+    ul {
         list-style: none;
         margin: 0;
 
         @media #{$mobile-screen} { padding: 1em; }
+    }
 
-        > li {
-            float: left;
+    li {
+        float: left;
 
-            > a {
-                position: relative;
-                display: block;
-                padding: 1em;
-                color: currentColor;
-                text-decoration: none;
-                border: 0;
+        > a {
+            position: relative;
+            display: block;
+            padding: 1em;
+            color: currentColor;
+            text-decoration: none;
+            border: 0;
 
-                &:focus, &:hover, &:active { background-color: transparent; }
+            &:focus, &:hover, &:active { background-color: transparent; }
 
-                &:after {
-                    content: "";
-                    border-bottom: 1px solid currentColor;
-                    position: absolute;
-                    width: 100%;
-                    left: 0;
-                    bottom: 0;
-                    margin: 1em;
-                    transform: scale(0, 1);
-                    transition: 150ms ease-out;
-                }
-
-                &:hover {
-                    &:after { transform: scale(.3, 1); }
-                }
+            &:after {
+                content: "";
+                border-bottom: 1px solid currentColor;
+                position: absolute;
+                width: 100%;
+                left: 0;
+                bottom: 0;
+                margin: 1em;
+                transform: scale(0, 1);
+                transition: 150ms ease-out;
             }
+
+            &:hover:after { transform: scale(.3, 1); }
         }
     }
 }
@@ -225,15 +249,13 @@ body {
         }
 
         &:after {
+            @extend %overlay;
+
             content: attr(title);
             text-align: center;
             padding: 5.5em 0;
             text-transform: uppercase;
             font-weight: 300;
-            background-image: $stripe;
-            background-position: center;
-            background-repeat: repeat;
-            background-color: $overlay;
             opacity: 0;
         }
 
@@ -257,6 +279,8 @@ body {
         > img { display: block; }
 
         > figcaption {
+            @extend %overlay;
+
             display: block;
             position: absolute;
             top: 0;
@@ -264,10 +288,6 @@ body {
             height: 100%;
             width: 100%;
             opacity: 0;
-            background-image: $stripe;
-            background-position: center;
-            background-repeat: repeat;
-            background-color: $overlay;
             transition: 300ms ease-out;
 
             &:after {
