@@ -1,14 +1,14 @@
 {
-  "name": "@satya164/portfolio",
+  "name": "@satya164/aayana",
   "version": "1.0.0",
-  "description": "Satyajit Sahoo's portfolio",
+  "description": "Aayana Dance Company",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Satyajit Sahoo <satyajit.happy@gmail.com> (https://github.com/satya164/)",
   "license": "MIT",
   "devDependencies": {
-    "babel": "latest",
+    "babel-core": "latest",
     "babel-eslint": "latest",
     "babelify": "latest",
     "browser-sync": "latest",
