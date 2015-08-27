@@ -50,6 +50,14 @@ body {
         width: 100%;
     }
 
+    &-flare {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+    }
+
     &-inner {
         position: relative;
         display: table;

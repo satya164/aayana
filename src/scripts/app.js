@@ -1,5 +1,7 @@
 import instagram from "./instagram";
+import Particle from "./particle";
 
+// Load instagram photos
 function loadPhotos(err, res) {
     let stream = document.getElementById("instagram-stream");
 
@@ -59,6 +61,48 @@ function loadPhotos(err, res) {
     stream.appendChild(fragment);
 }
 
+// Draw a flare on hero image
+function renderParticles() {
+    const canvas = document.getElementById("cover-flare");
+
+    canvas.width = 600;
+    canvas.height = 600;
+
+    let ctx = canvas.getContext("2d"),
+        x = canvas.getAttribute("width"),
+        y = canvas.getAttribute("height");
+
+    ctx.globalCompositeOperation = "lighter";
+
+    const particles = [];
+
+    for (let i = 0; i < 5; ++i) {
+        particles.push(new Particle({ ctx, x, y }));
+    }
+
+    function render() {
+        ctx.clearRect(0, 0, x, y);
+
+        particles.forEach(particle => particle.render());
+
+        const requestAnimationFrame =
+            window.requestAnimationFrame ||
+            window.mozrequestAnimationFrame ||
+            window.webkitrequestAnimationFrame ||
+            window.msrequestAnimationFrame;
+
+        if (requestAnimationFrame) {
+            requestAnimationFrame(render);
+        }
+    }
+
+    try {
+        render();
+    } catch(e) {
+        // Failed to draw particles
+    }
+}
+
 instagram((err, res) => {
     if (document.readyState === "complete") {
         loadPhotos(err, res);
@@ -66,6 +110,7 @@ instagram((err, res) => {
         document.onreadystatechange = () => {
             if (document.readyState === "complete") {
                 loadPhotos(err, res);
+                renderParticles();
             }
         };
     }
