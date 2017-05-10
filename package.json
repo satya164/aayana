@@ -16,7 +16,7 @@
     "del": "latest",
     "eslint": "latest",
     "gulp": "latest",
-    "gulp-autoprefixer": "^2.3.1",
+    "gulp-autoprefixer": "^4.0.0",
     "gulp-combine-mq": "^0.4.0",
     "gulp-eslint": "latest",
     "gulp-minify-css": "^1.2.0",
